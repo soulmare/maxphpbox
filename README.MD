@@ -38,9 +38,13 @@
 
 **/etc/php.ini** is shared by all PHP versions.
 
-**Virtual host** stores it's web files in *vhosts/<virtual_host_name>/public_html*. But also is processed *vhosts/<virtual_host_name>/.htaccess* file (located upper to web dir), where can be placed some development directives - for example, switching PHP version.
+**Virtual hosts'** web files are located in *vhosts/<virtual_host_name>/public_html*. Also *vhosts/<virtual_host_name>/.htaccess* file is processed (located one level up to web dir), where one can place some development directives - switching PHP version, etc.
 
-Listed **custom CLI/CGI PHPs will be compiled on guest machine** (thanks to [Phpbrew](https://github.com/phpbrew/phpbrew) tool) before installing as a part of LAMP stack. **Virtual hosts are created automatically** when you add a subdirectory in *vhosts/* (of course, you must also add them to */etc/hosts* to get them working). Virtual host web files are located on your host machine, and can be edited with any text editor or IDE. If on your environment it causes performance problems, try to change shared folder's type, or put your web files into guest's */var/www/* to receive all possible efficiency. Also changing *v.cpus* parameter in *Vagrantfile* may help. Databases are stored on guest's filesystem.
+Listed **custom CLI/CGI PHPs will be compiled on guest machine** (thanks to [Phpbrew](https://github.com/phpbrew/phpbrew) tool) before installing as a part of LAMP stack. Building all these PHPs on guest machine may consume a lot of time, though this approach may be changed in future versions to preloading ready-to-use PHP debs from somewhere.
+
+**Virtual hosts are created automatically** when you add a subdirectory in *vhosts/* (of course, they must be added to */etc/hosts* to get them working in local web-browser). Placing virtual hosts' web files on your host machine's shared folder is comfortable for development, as then they can be edited locally with any text editor or IDE. Unfortunately, on some environments it may cause performance problems. If so, you may try changing shared folder's type, or putting your web files into guest's */var/www/* to reach all possible efficiency from large PHP applications. Also changing *v.cpus* parameter in *Vagrantfile* may help.
+
+**Databases** are stored on guest's filesystem, though they will be lost when the guest is destroyed. For creating host's local backup of all guest's MySQL databases is used Percona Xtrabackup utility, which deals with binary database files and is faster then traditional *mysqldump*. To backup databases, launch command *vagrant provision --provision-with backup-databases*, and when you next destroy and recreate your guest, this backup will be automatically imported on first boot. 
 
 ## Access from host to guest
 
