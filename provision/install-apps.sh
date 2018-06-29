@@ -6,9 +6,7 @@
 
 export DEBIAN_FRONTEND=noninteractive
 
-
-FBOLD=`tput bold`
-FNORM=`tput sgr0`
+source /vagrant/scripts/setvars.sh
 
 echo "${FBOLD}Update apps ...${FNORM}"
 apt-get update -q && apt-get upgrade -yq

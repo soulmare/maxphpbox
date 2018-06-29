@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source /vagrant/scripts/setvars.sh
+
 if ! which mailhog>/dev/null; then
 
 #  if ! which sendmail>/dev/null; then

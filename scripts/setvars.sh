@@ -10,3 +10,6 @@ CLYELLOW=`tput setaf 3`
 CLNC=`tput sgr0`
 TXHLT="${FBOLD}${CLYELLOW}"
 TXNORM="${CLNC}${FNORM}"
+
+
+mkdir -p /vagrant/files/apps/
