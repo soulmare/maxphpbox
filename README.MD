@@ -44,7 +44,7 @@ Listed **custom CLI/CGI PHPs will be compiled on guest machine** (thanks to [Php
 
 **Virtual hosts are created automatically** when you add a subdirectory in *vhosts/* (of course, they must be added to */etc/hosts* to get them working in local web-browser). Placing virtual hosts' web files on your host machine's shared folder is comfortable for development, as then they can be edited locally with any text editor or IDE. Unfortunately, on some environments it may cause performance problems. If so, you may try changing shared folder's type, or putting your web files into guest's */var/www/* to reach all possible efficiency from large PHP applications. Also changing *v.cpus* parameter in *Vagrantfile* may help.
 
-**MySQL databases** are stored on guest's filesystem, though they will be lost when the guest is destroyed. For creating host's local backup of all guest's MySQL databases is used Percona Xtrabackup utility, which deals with binary database files and is faster then traditional *mysqldump*. To backup databases, launch command *vagrant provision --provision-with backup-databases*, and when you next destroy and recreate your guest, this backup will be automatically imported on first boot. 
+**MySQL databases** are stored on guest's filesystem, though they will be lost when the guest is destroyed. For creating host's local backup of all guest's MySQL databases is used *Percona Xtrabackup* utility, which deals with binary database files and is faster then traditional *mysqldump*. To backup databases, launch command *vagrant provision --provision-with backup-databases*, and when you next destroy and recreate your guest, this backup will be automatically imported on first boot. 
 
 ## Access from host to guest
 
