@@ -77,7 +77,15 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "restore-databases",
     type: "shell",
+    keep_color: true,
+    run: "always",
     path: "provision/restore-databases.sh"
+
+  config.vm.provision "backup-databases",
+    type: "shell",
+    keep_color: true,
+    run: "never",
+    path: "provision/backup-databases.sh"
 
   # Optional provisioners - build your own PHP packages
 

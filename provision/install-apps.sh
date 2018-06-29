@@ -29,6 +29,16 @@ if ! command -v mysql >/dev/null; then
   service mysql restart
 fi
 
+if ! command -v xtrabackup >/dev/null; then
+  echo "${FBOLD}Install Percona XtraBackup ...${FNORM}"
+  if [ ! -f /vagrant/files/apps/percona-release_0.1-6.$(lsb_release -sc)_all.deb ]; then
+    wget -q -O /vagrant/files/apps/percona-release_0.1-6.$(lsb_release -sc)_all.deb https://repo.percona.com/apt/percona-release_0.1-6.$(lsb_release -sc)_all.deb
+  fi
+  dpkg -i /vagrant/files/apps/percona-release_0.1-6.$(lsb_release -sc)_all.deb
+  apt-get update
+  apt-get install -yq percona-xtrabackup-24
+fi
+
 echo "${FBOLD}Install Sqlite ...${FNORM}"
 apt-get install -yq sqlite3
 
