@@ -1,6 +1,8 @@
 # MaxPHPBox Vagrant
 *Vagrant configuration based on **bento/ubuntu-16.04** basebox image. LAMP stack with ability to select PHP version for every virtual host. Automatic virtual hosts creation by simply creating new directories. Automatic backup/restore MySQL databases. No custom binaries, all is made mostly with Vagrant's shell provisioners.*
 
+### Attention! On first vagrant up it will build multiple PHP packages from sources, it may consume a lot of time.
+
 ## Description
 
 **MaxPHPBox Vagrant stills in maintenance state, though not fully automated and not well-documented yet**. For LAMP stack installation you first need to prepare all needed PHP .deb packages. To compile PHPs and package your own debs, you must invoke provisioners chain: *"install-build-tools,build-php,package-php"*. If this procedure succeeds, in host's *files/deb/* directory will be created ready-to-install deb packages for every PHP version. If later you'll decide to *vagrant destroy && vagrant up* your guest, there's no need to compile them again - they will be automatically installed from packages. Later, compiling process should be fully automated with no need to invoke any provisioners by hand.
