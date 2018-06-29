@@ -7,7 +7,7 @@
 
 **MaxPHPBox Vagrant stills in maintenance state, though not fully automated and not well-documented yet**. For LAMP stack installation you first need to prepare all needed PHP .deb packages. To compile PHPs and package your own debs, you must invoke provisioners chain: *"install-build-tools,build-php,package-php"*. If this procedure succeeds, in host's *files/deb/* directory will be created ready-to-install deb packages for every PHP version. If later you'll decide to *vagrant destroy && vagrant up* your guest, there's no need to compile them again - they will be automatically installed from packages. Later, compiling process should be fully automated with no need to invoke any provisioners by hand.
 
-## PHP versions included
+### PHP versions included
 
 * 7.0.30 (Apache module from Ubuntu 16.04 repository)
 * 5.2.17 (CLI/CGI)
@@ -19,7 +19,7 @@
 * 7.1.18 (CLI/CGI)
 * 7.2.7 (CLI/CGI)
 
-## PHP extensions included
+### PHP extensions included
 
 * XDebug
 * Memcached
@@ -27,7 +27,7 @@
 * GD
 * ... and others ...
 
-## Other software included
+### Other software included
 
 * MySQL
 * Sqlite
@@ -46,9 +46,19 @@ Listed **custom CLI/CGI PHPs will be compiled on guest machine** (thanks to [Php
 
 **Virtual hosts are created automatically** when you add a subdirectory in *vhosts/* (of course, they must be added to */etc/hosts* to get them working in local web-browser). Placing virtual hosts' web files on your host machine's shared folder is comfortable for development, as then they can be edited locally with any text editor or IDE. Unfortunately, on some environments it may cause performance problems. If so, you may try changing shared folder's type, or putting your web files into guest's */var/www/* to reach all possible efficiency from large PHP applications. Also changing *v.cpus* parameter in *Vagrantfile* may help.
 
-**MySQL databases** are stored on guest's filesystem, though they will be lost when the guest is destroyed. For creating host's local backup of all guest's MySQL databases is used *Percona Xtrabackup* utility, which deals with binary database files and is faster then traditional *mysqldump*. To backup databases, launch command *vagrant provision --provision-with backup-databases*, and when you next destroy and recreate your guest, this backup will be automatically imported on first boot. 
+**MySQL databases** are stored on guest's filesystem, though they will be lost when the guest is destroyed. For creating host's local backup of all guest's MySQL databases is used *Percona Xtrabackup* utility, which deals with binary database files and is faster then traditional *mysqldump*. To backup databases, launch command *vagrant provision --provision-with backup-databases*, and when you next destroy and recreate your guest, this backup will be automatically imported on first boot.
 
-## Access from host to guest
+### Install NFS daemon on Ubuntu host:
+
+sudo apt-get install -y nfs-kernel-server nfs-common
+
+### Install SSHFS shared folders support for your host:
+
+sudo apt-get install -y openssh-server
+vagrant plugin install vagrant-sshfs
+sudo ln -s /usr/lib/openssh/sftp-server /usr/bin/sftp-server
+
+### Access from host to guest
 
 root password: vagrant
 
@@ -68,18 +78,18 @@ mysql -uroot -proot -h 192.168.50.2
 
 mysql -uroot -proot -h vagrant
 
-## Install NFS daemon on Ubuntu host:
-
-sudo apt-get install -y nfs-kernel-server nfs-common
-
-## Install SSHFS shared folders support:
-
-sudo apt-get install -y openssh-server
-vagrant plugin install vagrant-sshfs
-sudo ln -s /usr/lib/openssh/sftp-server /usr/bin/sftp-server
-
-## MailHog
+### MailHog
 http://vagrant:8025/
 
-## Mailcatcher
+### Mailcatcher
+
+(if is installed instead of MailHog)
+
 http://vagrant:1080/
+
+## Contribution
+
+If you like this project, you may want to contribute in some way:
+* Fork and customize
+* Bug reports or feature request
+* Documentation, spellchecking, comments on source code, etc
