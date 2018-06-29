@@ -1,7 +1,11 @@
 # MaxPHPBox Vagrant
 **Custom Vagrantbox based on common box *bento/ubuntu-16.04*, providing LAMP server with multiple PHP versions easy switchable for every virtual host.**
 
-## PHP versions included:
+## Description
+
+**MaxPHPBox Vagrant stills in maintenance state, though not fully automated and not well-documented yet**. For LAMP stack installation you first need to prepare all needed PHP .deb packages. To compile PHPs and package your own debs, you must invoke provisioners chain: *"install-build-tools,build-php,package-php"*. If this procedure succeeds, in host's *files/deb/* directory will be created ready-to-install deb packages for every PHP version. If later you'll decide to *vagrant destroy && vagrant up* your guest, there's no need to compile them again - they will be automatically installed from packages. Later, compiling process should be fully automated with no need to invoke any provisioners by hand.
+
+## PHP versions included
 
 * 7.0.30 (Apache module from Ubuntu 16.04 repository)
 * 5.2.17 (CLI/CGI)
@@ -13,9 +17,21 @@
 * 7.1.18 (CLI/CGI)
 * 7.2.7 (CLI/CGI)
 
-Listed **custom CLI/CGI PHPs will be compiled on guest machine** (thanks to [Phpbrew](https://github.com/phpbrew/phpbrew) util) before installing as a part of LAMP stack. **Virtual hosts are created automatically** when you add a subdirectory in *vhosts/*. Virtual host web files are located on your host machine, and can be edited with any text editor or IDE. Also, you can put your web files into guest's */var/www/* to increase performance. Databases are stored on guest's filesystem.
+## PHP extensions included
 
-**Project is in maintenance state, is not fully automated** and not well-documented. For automatic installation you need to have compiled PHPs, packed in .deb files. To compile PHPs you must manually use the following provisioners chain: "install-build-tools,build-php,package-php". If this procedure succeeds, you will have in your host's *files/deb/* directory a ready-to-install packages for every PHP version, and if you'll decide to *vagrant destroy && vagrant up*, there's no need to compile them again. In future, it should be fully automated with no need to call any provisioners by hand.
+* XDebug
+* Memcached
+* Imagick
+* GD
+* ... and others ...
+
+## Configuration
+
+**/etc/php.ini** is shared by all PHP versions.
+
+**Virtual host** stores it's web files in *vhosts/<virtual_host_name>/public_html*. But also is processed *vhosts/<virtual_host_name>/.htaccess* file (located upper to web dir), where can be placed some development directives - for example, switching PHP version.
+
+Listed **custom CLI/CGI PHPs will be compiled on guest machine** (thanks to [Phpbrew](https://github.com/phpbrew/phpbrew) tool) before installing as a part of LAMP stack. **Virtual hosts are created automatically** when you add a subdirectory in *vhosts/* (of course, you must also add them to */etc/hosts* to get them working). Virtual host web files are located on your host machine, and can be edited with any text editor or IDE. If on your environment it causes performance problems, try to change shared folder's type, or put your web files into guest's */var/www/* to receive all possible efficiency. Also changing *v.cpus* parameter in *Vagrantfile* may help. Databases are stored on guest's filesystem.
 
 ## Access from host to guest
 
@@ -27,15 +43,21 @@ user password: vagrant
 
 ssh vagrant@192.168.50.2
 
+ssh vagrant@vagrant
+
 http://192.168.50.2/
 
+http://vagrant/
+
 mysql -uroot -proot -h 192.168.50.2
+
+mysql -uroot -proot -h vagrant
 
 ## Install NFS daemon on Ubuntu host:
 
 sudo apt-get install -y nfs-kernel-server nfs-common
 
-## To make available SSHFS shared folders:
+## Install SSHFS shared folders support:
 
 sudo apt-get install -y openssh-server
 vagrant plugin install vagrant-sshfs
