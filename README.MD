@@ -13,9 +13,9 @@
 * 7.1.18 (CLI/CGI)
 * 7.2.7 (CLI/CGI)
 
-All CLI/CGI PHPs must be compiled on guest machine before installing. Compilation is made with a help of [Phpbrew](https://github.com/phpbrew/phpbrew) util.
+Listed **custom CLI/CGI PHPs will be compiled on guest machine** (thanks to [Phpbrew](https://github.com/phpbrew/phpbrew) util) before installing as a part of LAMP stack. **Virtual hosts are created automatically** when you add a subdirectory in *vhosts/*. Virtual host web files are located on your host machine, and can be edited with any text editor or IDE. Also, you can put your web files into guest's */var/www/* to increase performance. Databases are stored on guest's filesystem.
 
-Project is in maintenance state, is not fully automated and not well-documented yet. For automatic installation you need to have compiled PHPs, packed in .deb files. To compile PHPs you must manually use the following provisioners chain: "install-build-tools,build-php,package-php". If this procedure succeeds, you will have in your host's *files/deb/* directory a ready-to-install packages for every PHP version, and if you'll decide to *vagrant destroy && vagrant up*, there's no need to compile them again. In future, it should be fully automated with no need to call any provisioners by hand.
+**Project is in maintenance state, is not fully automated** and not well-documented. For automatic installation you need to have compiled PHPs, packed in .deb files. To compile PHPs you must manually use the following provisioners chain: "install-build-tools,build-php,package-php". If this procedure succeeds, you will have in your host's *files/deb/* directory a ready-to-install packages for every PHP version, and if you'll decide to *vagrant destroy && vagrant up*, there's no need to compile them again. In future, it should be fully automated with no need to call any provisioners by hand.
 
 ## Access from host to guest
 
