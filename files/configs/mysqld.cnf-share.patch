@@ -1,0 +1,11 @@
+--- /etc/mysql/mysql.conf.d/mysqld.cnf.2.orig	2018-06-27 12:20:58.934866000 +0000
++++ /etc/mysql/mysql.conf.d/mysqld.cnf	2018-06-27 12:21:21.286036002 +0000
+@@ -33,7 +33,7 @@
+ socket		= /var/run/mysqld/mysqld.sock
+ port		= 3306
+ basedir		= /usr
+-datadir		= /var/lib/mysql
++datadir		= /var/lib/mysql-shared
+ tmpdir		= /tmp
+ lc-messages-dir	= /usr/share/mysql
+ skip-external-locking

@@ -1,0 +1,13 @@
+--- /etc/apparmor.d/usr.sbin.mysqld.orig	2018-04-20 11:50:44.000000000 +0000
++++ /etc/apparmor.d/usr.sbin.mysqld	2018-06-25 21:17:54.067224001 +0000
+@@ -46,8 +46,8 @@
+   /usr/share/mysql/** r,
+ 
+ # Allow data dir access
+-  /var/lib/mysql/ r,
+-  /var/lib/mysql/** rwk,
++  /var/lib/mysql-shared/ r,
++  /var/lib/mysql-shared/** rwk,
+ 
+ # Allow data files dir access
+   /var/lib/mysql-files/ r,

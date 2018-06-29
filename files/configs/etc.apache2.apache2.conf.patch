@@ -1,0 +1,32 @@
+--- /etc/apache2/apache2.conf.orig	2016-03-19 09:48:35.000000000 +0000
++++ /etc/apache2/apache2.conf	2018-06-28 18:41:47.493047697 +0000
+@@ -167,12 +167,17 @@
+ 	Require all granted
+ </Directory>
+ 
+-#<Directory /srv/>
+-#	Options Indexes FollowSymLinks
+-#	AllowOverride None
+-#	Require all granted
+-#</Directory>
++<Directory /vagrant/vhosts/*/>
++	Options Indexes FollowSymLinks
++	AllowOverride All
++	Require all denied
++</Directory>
+ 
++<Directory /vhosts/*/>
++        Options Indexes FollowSymLinks
++        AllowOverride All
++        Require all denied
++</Directory>
+ 
+ 
+ 
+@@ -218,4 +223,6 @@
+ # Include the virtual host configurations:
+ IncludeOptional sites-enabled/*.conf
+ 
++EnableSendfile off
++
+ # vim: syntax=apache ts=4 sw=4 sts=4 sr noet

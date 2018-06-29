@@ -1,0 +1,8 @@
+--- /etc/apparmor.d/tunables/alias.orig	2018-06-25 21:24:25.770978000 +0000
++++ /etc/apparmor.d/tunables/alias	2018-06-25 21:25:45.662903997 +0000
+@@ -14,3 +14,5 @@
+ #
+ # Or if mysql databases are stored in /home:
+ # alias /var/lib/mysql/ -> /home/mysql/,
++
++alias /var/lib/mysql/ -> /var/lib/mysql-shared/,

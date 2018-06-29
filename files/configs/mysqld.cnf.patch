@@ -1,0 +1,11 @@
+--- /etc/mysql/mysql.conf.d/mysqld.cnf.orig	2018-06-26 09:53:22.203472001 +0000
++++ /etc/mysql/mysql.conf.d/mysqld.cnf	2018-06-26 09:51:49.184986011 +0000
+@@ -40,7 +40,7 @@
+ #
+ # Instead of skip-networking the default is now to listen only on
+ # localhost which is more compatible and is not less secure.
+-bind-address		= 127.0.0.1
++bind-address		= 0.0.0.0
+ #
+ # * Fine Tuning
+ #

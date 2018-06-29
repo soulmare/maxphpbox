@@ -1,0 +1,3 @@
+- mysqldump backup/restore
+- phpmyadmin
++ mailhog or https://mailcatcher.me/

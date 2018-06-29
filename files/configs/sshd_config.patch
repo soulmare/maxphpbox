@@ -1,0 +1,11 @@
+--- /etc/ssh/sshd_config	2018-06-25 18:28:43.464032524 +0000
++++ /etc/ssh/sshd_config	2018-06-25 18:25:56.784032524 +0000
+@@ -72,7 +72,7 @@
+ #Banner /etc/issue.net
+ 
+ # Allow client to pass locale environment variables
+-AcceptEnv LANG LC_*
++#AcceptEnv LANG LC_*
+ 
+ Subsystem sftp /usr/lib/openssh/sftp-server
+ 
