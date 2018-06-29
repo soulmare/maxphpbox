@@ -1,0 +1,7 @@
+alias lh='ls -alFh'
+alias dus='du -sh * | sort -h'
+alias fcount='find . | wc -l'
+# Don't show temp files in `tree`
+alias tree="tree -I '*~'"
+# History without numbers - applicable for copy/paste. Usage: `histnn`, `histnn -n50` 
+alias histnn="history | cut -c 8- | tail"
