@@ -1,3 +1,4 @@
-- mysqldump backup/restore
 - phpmyadmin
-+ mailhog or https://mailcatcher.me/
+- toggle on/off PHP extensions
+- make Xtrabackup use more memory to speed it up (?)
+- mysqldump files import
