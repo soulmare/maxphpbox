@@ -32,6 +32,7 @@
 * MailHog
 * Ruby
 * Git
+* Htop
 
 ## Configuration
 
