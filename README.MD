@@ -1,5 +1,5 @@
 # MaxPHPBox Vagrant
-**Custom Vagrantbox based on common box *bento/ubuntu-16.04*, providing LAMP server with multiple PHP versions easy switchable for every virtual host.**
+*Custom Vagrant configuration, based on widely used **bento/ubuntu-16.04** basebox, setting up a LAMP server with multiple PHP versions easy switchable for every virtual host.*
 
 ## Description
 
@@ -24,6 +24,14 @@
 * Imagick
 * GD
 * ... and others ...
+
+## Other software included
+
+* MySQL
+* Sqlite
+* MailHog
+* Ruby
+* Git
 
 ## Configuration
 
