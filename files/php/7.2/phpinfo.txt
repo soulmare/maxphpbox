@@ -2,12 +2,12 @@ phpinfo()
 PHP Version => 7.2.7
 
 System => Linux vagrant 4.4.0-116-generic #140-Ubuntu SMP Mon Feb 12 21:23:04 UTC 2018 x86_64
-Build Date => Jun 26 2018 15:18:27
+Build Date => Jun 29 2018 19:16:56
 Configure Command =>  './configure'  '--cache-file=/root/.phpbrew/cache/config.cache' '--prefix=/root/.phpbrew/php/7.2' '--with-config-file-path=/root/.phpbrew/php/7.2/etc' '--with-config-file-scan-dir=/root/.phpbrew/php/7.2/var/db' '--disable-all' '--enable-short-tags' '--with-libdir=lib/x86_64-linux-gnu' '--enable-ipv6' '--enable-ftp' '--enable-hash' '--enable-exif' '--enable-cgi' '--enable-session' '--with-imap-ssl' '--with-tidy' '--with-xmlrpc' '--with-zlib=/usr' '--with-gettext=/usr' '--with-iconv' '--enable-soap' '--with-kerberos' '--with-gmp=/usr' '--enable-opcache' '--with-gd=shared' '--with-apxs2=/usr/bin/apxs2' '--enable-libxml' '--enable-simplexml' '--enable-xml' '--enable-xmlreader' '--enable-xmlwriter' '--with-xsl' '--with-libxml-dir=/usr' '--with-sqlite3' '--with-pdo-sqlite' '--with-mysqli=mysqlnd' '--with-pdo-mysql=mysqlnd' '--with-mysql-sock=/var/run/mysqld/mysqld.sock' '--with-pgsql=/usr/bin' '--with-pdo-pgsql=/usr/bin' '--enable-pdo' '--enable-bcmath' '--with-bz2=/usr' '--enable-calendar' '--enable-cli' '--enable-ctype' '--enable-dom' '--enable-fileinfo' '--enable-filter' '--enable-shmop' '--enable-sysvsem' '--enable-sysvshm' '--enable-sysvmsg' '--enable-json' '--enable-mbregex' '--enable-mbstring' '--with-mhash=/usr' '--with-mcrypt=/usr' '--enable-pcntl' '--with-pcre-regex' '--with-pcre-dir=/usr' '--with-pear=/root/.phpbrew/php/7.2/lib/php/pear' '--enable-phar' '--enable-posix' '--with-readline=/usr' '--enable-sockets' '--enable-tokenizer' '--with-curl=/usr' '--with-openssl=/usr' '--enable-zip' '--enable-force-cgi-redirect' '--disable-rpath' '--enable-gd-native-ttf' '--with-freetype-dir=/usr' '--with-jpeg-dir=/usr' '--with-png-dir=/usr' '--with-icu-dir=/usr' '--enable-fastcgi' '--enable-spl' '--enable-wddx' '--with-layout=GNU' '--with-libedit' '--with-mime-magic' '--with-pic' '--with-pspell=shared' '--with-unixODBC=shared,/usr' '--with-xpm-dir=/usr' '--with-imap' '--prefix=/opt/php/7.2' '--exec-prefix=/opt/php/7.2' '--sysconfdir=/opt/php/7.2/etc' '--with-config-file-path=/opt/php/7.2/etc' '--with-config-file-scan-dir=/opt/php/7.2/etc/php.d' '--with-pear=/opt/php/7.2/lib/php/pear'
 Server API => Command Line Interface
 Virtual Directory Support => disabled
 Configuration File (php.ini) Path => /opt/php/7.2/etc
-Loaded Configuration File => /opt/php/7.2/etc/php.ini
+Loaded Configuration File => (none)
 Scan this dir for additional .ini files => /opt/php/7.2/etc/php.d
 Additional .ini files parsed => /opt/php/7.2/etc/php.d/20-gd.ini,
 /opt/php/7.2/etc/php.d/20-imagick.ini,
@@ -81,16 +81,16 @@ default_mimetype => text/html => text/html
 disable_classes => no value => no value
 disable_functions => no value => no value
 display_errors => STDOUT => STDOUT
-display_startup_errors => On => On
+display_startup_errors => Off => Off
 doc_root => no value => no value
 docref_ext => no value => no value
 docref_root => no value => no value
-enable_dl => Off => Off
+enable_dl => On => On
 enable_post_data_reading => On => On
 error_append_string => no value => no value
 error_log => no value => no value
 error_prepend_string => no value => no value
-error_reporting => 32767 => 32767
+error_reporting => no value => no value
 expose_php => On => On
 extension_dir => /opt/php/7.2/lib/php/20170718 => /opt/php/7.2/lib/php/20170718
 file_uploads => On => On
@@ -108,7 +108,7 @@ implicit_flush => On => On
 include_path => .:/opt/php/7.2/lib/php/pear => .:/opt/php/7.2/lib/php/pear
 input_encoding => no value => no value
 internal_encoding => no value => no value
-log_errors => On => On
+log_errors => Off => Off
 log_errors_max_len => 1024 => 1024
 mail.add_x_header => Off => Off
 mail.force_extra_parameters => no value => no value
@@ -130,11 +130,11 @@ realpath_cache_ttl => 120 => 120
 register_argc_argv => On => On
 report_memleaks => On => On
 report_zend_debug => Off => Off
-request_order => GP => GP
+request_order => no value => no value
 sendmail_from => no value => no value
 sendmail_path =>  -t -i  =>  -t -i 
 serialize_precision => -1 => -1
-short_open_tag => Off => Off
+short_open_tag => On => On
 SMTP => localhost => localhost
 smtp_port => 25 => 25
 sys_temp_dir => no value => no value
@@ -145,7 +145,7 @@ upload_tmp_dir => no value => no value
 user_dir => no value => no value
 user_ini.cache_ttl => 300 => 300
 user_ini.filename => .user.ini => .user.ini
-variables_order => GPCS => GPCS
+variables_order => EGPCS => EGPCS
 xmlrpc_error_number => 0 => 0
 xmlrpc_errors => Off => Off
 zend.assertions => 1 => 1
@@ -434,7 +434,7 @@ Command buffer size => 4096
 Read buffer size => 32768
 Read timeout => 86400
 Collecting statistics => Yes
-Collecting memory statistics => Yes
+Collecting memory statistics => No
 Tracing => n/a
 Loaded plugins => mysqlnd,debug_trace,auth_plugin_mysql_native_password,auth_plugin_mysql_clear_password,auth_plugin_sha256_password
 API Extensions => mysqli,pdo_mysql
@@ -751,11 +751,11 @@ session.auto_start => Off => Off
 session.cache_expire => 180 => 180
 session.cache_limiter => nocache => nocache
 session.cookie_domain => no value => no value
-session.cookie_httponly => no value => no value
+session.cookie_httponly => 0 => 0
 session.cookie_lifetime => 0 => 0
 session.cookie_path => / => /
 session.cookie_secure => 0 => 0
-session.gc_divisor => 1000 => 1000
+session.gc_divisor => 100 => 100
 session.gc_maxlifetime => 1440 => 1440
 session.gc_probability => 1 => 1
 session.lazy_write => On => On
@@ -764,8 +764,8 @@ session.referer_check => no value => no value
 session.save_handler => files => files
 session.save_path => no value => no value
 session.serialize_handler => php => php
-session.sid_bits_per_character => 5 => 5
-session.sid_length => 26 => 26
+session.sid_bits_per_character => 4 => 4
+session.sid_length => 32 => 32
 session.upload_progress.cleanup => On => On
 session.upload_progress.enabled => On => On
 session.upload_progress.freq => 1% => 1%
@@ -859,7 +859,7 @@ libTidy Release => 25 March 2009
 Extension Version => 7.2.7 ($Id: 19b720964b65317b146dcc31b678ab20e7236543 $)
 
 Directive => Local Value => Master Value
-tidy.clean_output => no value => no value
+tidy.clean_output => 0 => 0
 tidy.default_config => no value => no value
 
 tokenizer
@@ -1046,16 +1046,20 @@ Module Name
 Environment
 
 Variable => Value
-XDG_SESSION_ID => 2
+XDG_SESSION_ID => 5
+PHPBREW_BIN => /root/.phpbrew/bin
 SHELL => /bin/bash
 TERM => vt100
-SSH_CLIENT => 10.0.2.2 42688 22
+SSH_CLIENT => 10.0.2.2 41038 22
+PHPBREW_ROOT => /root/.phpbrew
 USER => root
 SUDO_USER => vagrant
 SUDO_UID => 1000
 USERNAME => root
 MAIL => /var/mail/vagrant
 PATH => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/bin/
+PHPBREW_HOME => /root/.phpbrew
+PHPBREW_VERSION_REGEX => ^([[:digit:]]+\.){2}[[:digit:]]+((alpha|beta|RC)[[:digit:]]+)?$
 PWD => /home/vagrant
 LANG => en_US.UTF-8
 SHLVL => 3
@@ -1063,7 +1067,7 @@ HOME => /root
 SUDO_COMMAND => /bin/bash -l
 LANGUAGE => en_US:
 LOGNAME => root
-SSH_CONNECTION => 10.0.2.2 42688 10.0.2.15 22
+SSH_CONNECTION => 10.0.2.2 41038 10.0.2.15 22
 XDG_DATA_DIRS => /usr/local/share:/usr/share:/var/lib/snapd/desktop
 DEBIAN_FRONTEND => noninteractive
 XDG_RUNTIME_DIR => /run/user/1000
@@ -1073,16 +1077,20 @@ _ => /opt/php/7.2/bin/php
 PHP Variables
 
 Variable => Value
-$_SERVER['XDG_SESSION_ID'] => 2
+$_SERVER['XDG_SESSION_ID'] => 5
+$_SERVER['PHPBREW_BIN'] => /root/.phpbrew/bin
 $_SERVER['SHELL'] => /bin/bash
 $_SERVER['TERM'] => vt100
-$_SERVER['SSH_CLIENT'] => 10.0.2.2 42688 22
+$_SERVER['SSH_CLIENT'] => 10.0.2.2 41038 22
+$_SERVER['PHPBREW_ROOT'] => /root/.phpbrew
 $_SERVER['USER'] => root
 $_SERVER['SUDO_USER'] => vagrant
 $_SERVER['SUDO_UID'] => 1000
 $_SERVER['USERNAME'] => root
 $_SERVER['MAIL'] => /var/mail/vagrant
 $_SERVER['PATH'] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/bin/
+$_SERVER['PHPBREW_HOME'] => /root/.phpbrew
+$_SERVER['PHPBREW_VERSION_REGEX'] => ^([[:digit:]]+\.){2}[[:digit:]]+((alpha|beta|RC)[[:digit:]]+)?$
 $_SERVER['PWD'] => /home/vagrant
 $_SERVER['LANG'] => en_US.UTF-8
 $_SERVER['SHLVL'] => 3
@@ -1090,7 +1098,7 @@ $_SERVER['HOME'] => /root
 $_SERVER['SUDO_COMMAND'] => /bin/bash -l
 $_SERVER['LANGUAGE'] => en_US:
 $_SERVER['LOGNAME'] => root
-$_SERVER['SSH_CONNECTION'] => 10.0.2.2 42688 10.0.2.15 22
+$_SERVER['SSH_CONNECTION'] => 10.0.2.2 41038 10.0.2.15 22
 $_SERVER['XDG_DATA_DIRS'] => /usr/local/share:/usr/share:/var/lib/snapd/desktop
 $_SERVER['DEBIAN_FRONTEND'] => noninteractive
 $_SERVER['XDG_RUNTIME_DIR'] => /run/user/1000
@@ -1101,13 +1109,40 @@ $_SERVER['SCRIPT_NAME'] =>
 $_SERVER['SCRIPT_FILENAME'] => 
 $_SERVER['PATH_TRANSLATED'] => 
 $_SERVER['DOCUMENT_ROOT'] => 
-$_SERVER['REQUEST_TIME_FLOAT'] => 1530026485.5747
-$_SERVER['REQUEST_TIME'] => 1530026485
+$_SERVER['REQUEST_TIME_FLOAT'] => 1530300063.4716
+$_SERVER['REQUEST_TIME'] => 1530300063
 $_SERVER['argv'] => Array
 (
 )
 
 $_SERVER['argc'] => 0
+$_ENV['XDG_SESSION_ID'] => 5
+$_ENV['PHPBREW_BIN'] => /root/.phpbrew/bin
+$_ENV['SHELL'] => /bin/bash
+$_ENV['TERM'] => vt100
+$_ENV['SSH_CLIENT'] => 10.0.2.2 41038 22
+$_ENV['PHPBREW_ROOT'] => /root/.phpbrew
+$_ENV['USER'] => root
+$_ENV['SUDO_USER'] => vagrant
+$_ENV['SUDO_UID'] => 1000
+$_ENV['USERNAME'] => root
+$_ENV['MAIL'] => /var/mail/vagrant
+$_ENV['PATH'] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/bin/
+$_ENV['PHPBREW_HOME'] => /root/.phpbrew
+$_ENV['PHPBREW_VERSION_REGEX'] => ^([[:digit:]]+\.){2}[[:digit:]]+((alpha|beta|RC)[[:digit:]]+)?$
+$_ENV['PWD'] => /home/vagrant
+$_ENV['LANG'] => en_US.UTF-8
+$_ENV['SHLVL'] => 3
+$_ENV['HOME'] => /root
+$_ENV['SUDO_COMMAND'] => /bin/bash -l
+$_ENV['LANGUAGE'] => en_US:
+$_ENV['LOGNAME'] => root
+$_ENV['SSH_CONNECTION'] => 10.0.2.2 41038 10.0.2.15 22
+$_ENV['XDG_DATA_DIRS'] => /usr/local/share:/usr/share:/var/lib/snapd/desktop
+$_ENV['DEBIAN_FRONTEND'] => noninteractive
+$_ENV['XDG_RUNTIME_DIR'] => /run/user/1000
+$_ENV['SUDO_GID'] => 1000
+$_ENV['_'] => /opt/php/7.2/bin/php
 
 PHP License
 This program is free software; you can redistribute it and/or modify

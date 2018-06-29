@@ -21,25 +21,29 @@
 
 source /vagrant/scripts/setvars.sh
 
-if [ -d /vagrant/files/deb ]; then
-  echo "PHP packages directory exists. To force recompile packages, remove directory files/deb/"
+if [[ -d /opt/php || -d /vagrant/files/deb ]]; then
+  echo "To force recompile PHPs, remove guest's directory /opt/php and host's files/deb"
   exit
 fi
 
-export DEBIAN_FRONTEND=noninteractive
+if [ -d /opt/php ]; then
+  echo "To force build PHP packages, remove host's directory files/deb/"
+  exit
+fi
+
 export PATH="$PATH:/usr/bin/"
 
 echo "${FBOLD}Install development libs ...${FNORM}"
 
-apt-get install -y apache2-dev libreadline-dev libc-client2007e-dev libxslt-dev libtidy-dev libedit-dev \
+apt-get install -yq apache2-dev libreadline-dev libc-client2007e-dev libxslt-dev libtidy-dev libedit-dev \
     libpspell-dev libsqlite3-dev unixodbc-dev libmysqlclient-dev libsasl2-dev libldb-dev libldap-dev libkrb5-dev \
     libfreetype6-dev libxpm-dev libpng-dev libpcre++-dev libjpeg-dev libbz2-dev libgnutls-openssl-dev libfcgi-dev \
     libmcrypt-dev libssl-dev libcurl4-openssl-dev pkg-config libxml2-dev librecode-dev libmhash-dev \
-    libmemcached-dev libmagickwand-dev libmagickcore-dev libpq-dev >>/tmp/provision.log 2>&1
+    libmemcached-dev libmagickwand-dev libmagickcore-dev libpq-dev
 
 echo "${FBOLD}Install build essentials ...${FNORM}"
 
-apt-get install -y checkinstall autoconf re2c >>/tmp/provision.log 2>&1
+apt-get install -yq checkinstall autoconf re2c
 
 
 #PHPBREW_CMD_FLAGS="--debug"

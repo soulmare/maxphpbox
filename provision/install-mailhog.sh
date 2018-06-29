@@ -57,6 +57,9 @@ EOL
   
   # Forward PHP mail to MailHog
   printf "\n# Forward PHP mail to MailHog\nsendmail_path = mhsendmail\n" >>/etc/php.ini    
+
+  echo "Restart Apache ..."
+  service apache2 restart
   
   # Check URL: http://vagrant:8025/
 

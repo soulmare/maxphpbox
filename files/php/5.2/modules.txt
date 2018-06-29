@@ -1,14 +1,4 @@
-PHP Warning:  PHP Startup: Unable to load dynamic library './imagick.so' - ./imagick.so: cannot open shared object file: No such file or directory in Unknown on line 0
-PHP Warning:  PHP Startup: Unable to load dynamic library './memcached.so' - ./memcached.so: cannot open shared object file: No such file or directory in Unknown on line 0
-PHP Warning:  PHP Startup: Unable to load dynamic library './mysql.so' - ./mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
-PHP Warning:  PHP Startup: Unable to load dynamic library './mysqli.so' - ./mysqli.so: cannot open shared object file: No such file or directory in Unknown on line 0
-PHP Warning:  PHP Startup: Unable to load dynamic library './odbc.so' - ./odbc.so: cannot open shared object file: No such file or directory in Unknown on line 0
-PHP Warning:  PHP Startup: Unable to load dynamic library './pdo_mysql.so' - ./pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
-PHP Warning:  PHP Startup: Unable to load dynamic library './pdo_odbc.so' - ./pdo_odbc.so: cannot open shared object file: No such file or directory in Unknown on line 0
-PHP Warning:  PHP Startup: Unable to load dynamic library './pdo_sqlite.so' - ./pdo_sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
-PHP Warning:  PHP Startup: Unable to load dynamic library './phar.so' - ./phar.so: cannot open shared object file: No such file or directory in Unknown on line 0
-PHP Warning:  PHP Startup: Unable to load dynamic library './pspell.so' - ./pspell.so: cannot open shared object file: No such file or directory in Unknown on line 0
-PHP Warning:  PHP Startup: Unable to load dynamic library './sqlite.so' - ./sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/php/5.2/lib/php/20060613/mysqli.so' - /opt/php/5.2/lib/php/20060613/mysqli.so: undefined symbol: client_errors in Unknown on line 0
 [PHP Modules]
 bcmath
 bz2
@@ -25,18 +15,27 @@ gettext
 gmp
 hash
 iconv
+imagick
 imap
 json
 libxml
 mbstring
 mcrypt
+memcached
 mhash
 mime_magic
+mysql
+odbc
 openssl
 pcntl
 pcre
 PDO
+pdo_mysql
+PDO_ODBC
+pdo_sqlite
+Phar
 posix
+pspell
 readline
 Reflection
 session
@@ -45,6 +44,7 @@ SimpleXML
 soap
 sockets
 SPL
+SQLite
 standard
 sysvmsg
 sysvsem

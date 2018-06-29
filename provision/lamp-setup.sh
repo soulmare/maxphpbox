@@ -32,7 +32,7 @@ if ! $DRYRUN; then
     DEPS_LIST="$DEPS_LIST $(dpkg -f /vagrant/files/deb/php-*.deb Depends | sed 's/,//g' | sed 's/Depends://g')"
   done
   
-  apt-get install -y $(dpkg -f /vagrant/files/deb/php-*.deb Depends | sed 's/,//g' | sed 's/Depends://g')
+  apt-get install -yq $(dpkg -f /vagrant/files/deb/php-*.deb Depends | sed 's/,//g' | sed 's/Depends://g')
   
   echo "${TXHLT}Install custom PHP packages  ...${TXNORM}"
   
@@ -55,8 +55,10 @@ mv -f /var/www/html/index.html /var/www/html/index-default.html 2>/dev/null
 echo '<?php phpinfo();' >/var/www/html/info.php
 cp -n /vagrant/scripts/php-mail-test.php /var/www/html/
 
-a2dismod mpm_event
-a2enmod rewrite actions cgi mpm_prefork
+sed -i 's/libphp7.0.30.so/libphp7.0.so/' /etc/apache2/mods-available/php7.0.load
+
+a2dismod mpm_event php5 php7 2>/dev/null
+a2enmod rewrite actions cgi mpm_prefork php7.0
 
 if [ ! -f /etc/php/7.0/apache2/php.ini.bak ]; then
   mv /etc/php/7.0/apache2/php.ini /etc/php/7.0/apache2/php.ini.bak
@@ -96,6 +98,9 @@ if [ -d /var/www/html/webgrind ]; then
 fi
 
 chown -R vagrant:vagrant /var/www/html/
+
+# Create test virtual host
+mkdir -p /vagrant/vhosts/test.local
 
 echo "Restart Apache ..."
 service apache2 restart

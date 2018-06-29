@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
   # Machine settings
 
   config.vm.provider "virtualbox" do |v|
-    v.name = "maxphp-work"
+    v.name = "maxphpbox"
     #v.cpus = 2
     #v.memory = 512
     v.cpus = 4
@@ -57,6 +57,16 @@ Vagrant.configure("2") do |config|
     type: "shell",
     path: "provision/install-apps.sh"
 
+  config.vm.provision "build-php",
+    type: "shell",
+    keep_color: true,
+    path: "provision/build-php.sh"
+
+  config.vm.provision "package-php",
+    type: "shell",
+    keep_color: true,
+    path: "provision/package-php.sh"
+
   config.vm.provision "lamp-setup",
     type: "shell",
     path: "provision/lamp-setup.sh"
@@ -70,39 +80,25 @@ Vagrant.configure("2") do |config|
   #  type: "shell",
   #  path: "provision/install-mailcatcher.sh"
 
-  config.vm.provision "vhosts",
-    type: "shell",
-    run: "always",
-    path: "provision/vhosts.sh"
-
   config.vm.provision "restore-databases",
     type: "shell",
     keep_color: true,
     run: "always",
     path: "provision/restore-databases.sh"
 
+  config.vm.provision "vhosts",
+    type: "shell",
+    run: "always",
+    path: "provision/vhosts.sh"
+
+
+  # Special non-automatic provisiners
+
   config.vm.provision "backup-databases",
     type: "shell",
     keep_color: true,
     run: "never",
     path: "provision/backup-databases.sh"
-
-  # Optional provisioners - build your own PHP packages
-
-  config.vm.provision "install-build-tools",
-    type: "shell",
-    run: "never",
-    path: "provision/install-build-tools.sh"
-
-  config.vm.provision "build-php",
-    type: "shell",
-    run: "never",
-    path: "provision/build-php.sh"
-
-  config.vm.provision "package-php",
-    type: "shell",
-    run: "never",
-    path: "provision/package-php.sh"
 
   config.vm.provision "purge-build-stuff",
     type: "shell",

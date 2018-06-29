@@ -4,22 +4,15 @@
 
 # Create PHP .deb packages
 
-FBOLD=`tput bold`
-FNORM=`tput sgr0`
-CLRED=`tput setaf 1`
-CLGREEN=`tput setaf 2`
-CLYELLOW=`tput setaf 3`
-CLNC=`tput sgr0`
-TXHLT="${FBOLD}${CLYELLOW}"
-TXNORM="${CLNC}${FNORM}"
+source /vagrant/scripts/setvars.sh
+
+if [ -d /vagrant/files/deb ]; then
+  echo "To force build PHP packages, remove host's directory files/deb/"
+  exit
+fi
 
 echo "${TXHLT}Create .deb packages for compiled PHPs${TXNORM}"
 echo "    To see checkinstall's logfile interactively, use command: '$ tail -F /tmp/checkinstall.log'"
-
-mkdir -p /vagrant/files/deb/old/
-
-# Force rebuilding all packages
-#mv /vagrant/files/deb/*.deb /vagrant/files/deb/old/ 2>/dev/null
 
 rm -rf $HOME/.phpbrew/build/tmp.*
 PHP_BUILD_FOLDERS=$HOME/.phpbrew/build/*
@@ -90,8 +83,8 @@ do
           --pkgversion $pkgversion \
           --pakdir /vagrant/files/deb \
           --exclude=/etc/apache2/mods-available,/etc/apache2/mods-enabled,/var/lib/apache2/module \
-          --include=pkg-include-list.txt \
-        >/tmp/checkinstall.log 2>&1
+          --include=pkg-include-list.txt
+#        >/tmp/checkinstall.log 2>&1
 #          --exclude=/etc/apache2/mods-available/php5.load,/etc/apache2/mods-available/php5.load.bak~,/etc/apache2/mods-enabled/php5.load,/etc/apache2/mods-available/php7.load,/etc/apache2/mods-available/php7.load.bak~,/etc/apache2/mods-enabled/php7.load, \
 
     else

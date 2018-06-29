@@ -2,3 +2,6 @@
 - toggle on/off PHP extensions
 - make Xtrabackup use more memory to speed it up (?)
 - mysqldump files import
+- change hostname to box name
+- use IP as parameter, not hardcoded in scripts
+- remove log colors, leave only bold style
