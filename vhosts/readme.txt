@@ -1,0 +1,1 @@
+Place here empty directories named as your hosts, and launch command "vagrant provision --provision-with vhosts" or "vagrant reload". This will create virtual hosts on guest machine, and initialize your directories with some basic structure.
