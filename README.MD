@@ -1,5 +1,5 @@
 # MaxPHPBox Vagrant
-*Custom Vagrant configuration, based on widely used **bento/ubuntu-16.04** basebox image, which allow to automatically set up a LAMP web development server with multiple PHP versions easy switchable for every virtual host.*
+*Vagrant configuration based on **bento/ubuntu-16.04** basebox image. LAMP stack with ability to select PHP version for every virtual host. Automatic virtual hosts creation by simply creating new directories. Automatic backup/restore MySQL databases. No custom binaries, all is made mostly with Vagrant's shell provisioners.*
 
 ## Description
 
