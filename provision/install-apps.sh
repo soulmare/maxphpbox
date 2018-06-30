@@ -45,6 +45,8 @@ apt-get install -yq ruby
 
 echo "${FBOLD}Install utilities ...${FNORM}"
 apt-get install -yq vim curl composer git htop zip g++
+wget -O /usr/local/bin/ack https://beyondgrep.com/ack-2.24-single-file
+chmod a+x /usr/local/bin/ack
 
 echo "${FBOLD}Install LAMP components ...${FNORM}"
 apt-get install -yq apache2 php libapache2-mod-php php-mysql php-mcrypt php-bcmath php-imap php-mbstring php-pspell php-soap php-curl php-gd php-gmp php-odbc php-sqlite3 php-tidy php-zip php-xmlrpc php-bz2 php-xml php-xdebug php-memcached php-imagick php-pear libfcgi0ldbl imagemagick memcached
