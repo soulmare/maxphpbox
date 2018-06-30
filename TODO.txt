@@ -5,3 +5,4 @@
 - change hostname to box name
 - use IP as parameter, not hardcoded in scripts
 - remove log colors, leave only bold style
+- mysql empty password
