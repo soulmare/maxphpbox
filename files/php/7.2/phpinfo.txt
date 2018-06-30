@@ -2,7 +2,7 @@ phpinfo()
 PHP Version => 7.2.7
 
 System => Linux vagrant 4.4.0-116-generic #140-Ubuntu SMP Mon Feb 12 21:23:04 UTC 2018 x86_64
-Build Date => Jun 29 2018 19:16:56
+Build Date => Jun 30 2018 14:08:02
 Configure Command =>  './configure'  '--cache-file=/root/.phpbrew/cache/config.cache' '--prefix=/root/.phpbrew/php/7.2' '--with-config-file-path=/root/.phpbrew/php/7.2/etc' '--with-config-file-scan-dir=/root/.phpbrew/php/7.2/var/db' '--disable-all' '--enable-short-tags' '--with-libdir=lib/x86_64-linux-gnu' '--enable-ipv6' '--enable-ftp' '--enable-hash' '--enable-exif' '--enable-cgi' '--enable-session' '--with-imap-ssl' '--with-tidy' '--with-xmlrpc' '--with-zlib=/usr' '--with-gettext=/usr' '--with-iconv' '--enable-soap' '--with-kerberos' '--with-gmp=/usr' '--enable-opcache' '--with-gd=shared' '--with-apxs2=/usr/bin/apxs2' '--enable-libxml' '--enable-simplexml' '--enable-xml' '--enable-xmlreader' '--enable-xmlwriter' '--with-xsl' '--with-libxml-dir=/usr' '--with-sqlite3' '--with-pdo-sqlite' '--with-mysqli=mysqlnd' '--with-pdo-mysql=mysqlnd' '--with-mysql-sock=/var/run/mysqld/mysqld.sock' '--with-pgsql=/usr/bin' '--with-pdo-pgsql=/usr/bin' '--enable-pdo' '--enable-bcmath' '--with-bz2=/usr' '--enable-calendar' '--enable-cli' '--enable-ctype' '--enable-dom' '--enable-fileinfo' '--enable-filter' '--enable-shmop' '--enable-sysvsem' '--enable-sysvshm' '--enable-sysvmsg' '--enable-json' '--enable-mbregex' '--enable-mbstring' '--with-mhash=/usr' '--with-mcrypt=/usr' '--enable-pcntl' '--with-pcre-regex' '--with-pcre-dir=/usr' '--with-pear=/root/.phpbrew/php/7.2/lib/php/pear' '--enable-phar' '--enable-posix' '--with-readline=/usr' '--enable-sockets' '--enable-tokenizer' '--with-curl=/usr' '--with-openssl=/usr' '--enable-zip' '--enable-force-cgi-redirect' '--disable-rpath' '--enable-gd-native-ttf' '--with-freetype-dir=/usr' '--with-jpeg-dir=/usr' '--with-png-dir=/usr' '--with-icu-dir=/usr' '--enable-fastcgi' '--enable-spl' '--enable-wddx' '--with-layout=GNU' '--with-libedit' '--with-mime-magic' '--with-pic' '--with-pspell=shared' '--with-unixODBC=shared,/usr' '--with-xpm-dir=/usr' '--with-imap' '--prefix=/opt/php/7.2' '--exec-prefix=/opt/php/7.2' '--sysconfdir=/opt/php/7.2/etc' '--with-config-file-path=/opt/php/7.2/etc' '--with-config-file-scan-dir=/opt/php/7.2/etc/php.d' '--with-pear=/opt/php/7.2/lib/php/pear'
 Server API => Command Line Interface
 Virtual Directory Support => disabled
@@ -1046,11 +1046,11 @@ Module Name
 Environment
 
 Variable => Value
-XDG_SESSION_ID => 5
+XDG_SESSION_ID => 4
 PHPBREW_BIN => /root/.phpbrew/bin
 SHELL => /bin/bash
 TERM => vt100
-SSH_CLIENT => 10.0.2.2 41038 22
+SSH_CLIENT => 10.0.2.2 34466 22
 PHPBREW_ROOT => /root/.phpbrew
 USER => root
 SUDO_USER => vagrant
@@ -1067,7 +1067,7 @@ HOME => /root
 SUDO_COMMAND => /bin/bash -l
 LANGUAGE => en_US:
 LOGNAME => root
-SSH_CONNECTION => 10.0.2.2 41038 10.0.2.15 22
+SSH_CONNECTION => 10.0.2.2 34466 10.0.2.15 22
 XDG_DATA_DIRS => /usr/local/share:/usr/share:/var/lib/snapd/desktop
 DEBIAN_FRONTEND => noninteractive
 XDG_RUNTIME_DIR => /run/user/1000
@@ -1077,11 +1077,11 @@ _ => /opt/php/7.2/bin/php
 PHP Variables
 
 Variable => Value
-$_SERVER['XDG_SESSION_ID'] => 5
+$_SERVER['XDG_SESSION_ID'] => 4
 $_SERVER['PHPBREW_BIN'] => /root/.phpbrew/bin
 $_SERVER['SHELL'] => /bin/bash
 $_SERVER['TERM'] => vt100
-$_SERVER['SSH_CLIENT'] => 10.0.2.2 41038 22
+$_SERVER['SSH_CLIENT'] => 10.0.2.2 34466 22
 $_SERVER['PHPBREW_ROOT'] => /root/.phpbrew
 $_SERVER['USER'] => root
 $_SERVER['SUDO_USER'] => vagrant
@@ -1098,7 +1098,7 @@ $_SERVER['HOME'] => /root
 $_SERVER['SUDO_COMMAND'] => /bin/bash -l
 $_SERVER['LANGUAGE'] => en_US:
 $_SERVER['LOGNAME'] => root
-$_SERVER['SSH_CONNECTION'] => 10.0.2.2 41038 10.0.2.15 22
+$_SERVER['SSH_CONNECTION'] => 10.0.2.2 34466 10.0.2.15 22
 $_SERVER['XDG_DATA_DIRS'] => /usr/local/share:/usr/share:/var/lib/snapd/desktop
 $_SERVER['DEBIAN_FRONTEND'] => noninteractive
 $_SERVER['XDG_RUNTIME_DIR'] => /run/user/1000
@@ -1109,18 +1109,18 @@ $_SERVER['SCRIPT_NAME'] =>
 $_SERVER['SCRIPT_FILENAME'] => 
 $_SERVER['PATH_TRANSLATED'] => 
 $_SERVER['DOCUMENT_ROOT'] => 
-$_SERVER['REQUEST_TIME_FLOAT'] => 1530300063.4716
-$_SERVER['REQUEST_TIME'] => 1530300063
+$_SERVER['REQUEST_TIME_FLOAT'] => 1530367915.153
+$_SERVER['REQUEST_TIME'] => 1530367915
 $_SERVER['argv'] => Array
 (
 )
 
 $_SERVER['argc'] => 0
-$_ENV['XDG_SESSION_ID'] => 5
+$_ENV['XDG_SESSION_ID'] => 4
 $_ENV['PHPBREW_BIN'] => /root/.phpbrew/bin
 $_ENV['SHELL'] => /bin/bash
 $_ENV['TERM'] => vt100
-$_ENV['SSH_CLIENT'] => 10.0.2.2 41038 22
+$_ENV['SSH_CLIENT'] => 10.0.2.2 34466 22
 $_ENV['PHPBREW_ROOT'] => /root/.phpbrew
 $_ENV['USER'] => root
 $_ENV['SUDO_USER'] => vagrant
@@ -1137,7 +1137,7 @@ $_ENV['HOME'] => /root
 $_ENV['SUDO_COMMAND'] => /bin/bash -l
 $_ENV['LANGUAGE'] => en_US:
 $_ENV['LOGNAME'] => root
-$_ENV['SSH_CONNECTION'] => 10.0.2.2 41038 10.0.2.15 22
+$_ENV['SSH_CONNECTION'] => 10.0.2.2 34466 10.0.2.15 22
 $_ENV['XDG_DATA_DIRS'] => /usr/local/share:/usr/share:/var/lib/snapd/desktop
 $_ENV['DEBIAN_FRONTEND'] => noninteractive
 $_ENV['XDG_RUNTIME_DIR'] => /run/user/1000
