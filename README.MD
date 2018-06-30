@@ -96,6 +96,8 @@ http://vagrant:1080/
 ## Contribution
 
 If you like this project, you may want to contribute in some way:
-* Fork and customize
-* Bug reports or feature request
-* Documentation, spellchecking, comments on source code, etc
+* Fork, bugfix, impove & merge
+* Bug report or maybe, feature request
+* Documentation improve, spellchecking & english grammar, comments on source code, etc
+
+For development needs can be used *./auto-snapshot.sh* script, which recreates a machine from scratch and saves a snapshot after each successfull provisioner. 
