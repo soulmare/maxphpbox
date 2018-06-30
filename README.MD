@@ -1,11 +1,11 @@
 # MaxPHPBox Vagrant
-*Vagrant configuration based on **bento/ubuntu-16.04** basebox image. LAMP stack with ability to select PHP version for every virtual host. Automatic virtual hosts creation by simply creating new directories. Automatic backup/restore MySQL databases. No custom binaries, all is made mostly with Vagrant's shell provisioners.*
+*MaxPHPBox is Vagrant configuration, based on **bento/ubuntu-16.04** basebox image, which provides a ready to work LAMP stack with an ability to select PHP version for every virtual host. New virtual hosts are created by simply adding new directories into vhosts/ dir. Included script for easy backup/restore all MySQL databases of guest machine, so it can be painlessly recreated from scratch.*
 
-#### Attention! On first vagrant up it will build multiple PHP packages from sources, it may consume a lot of time.
+#### Attention! On the first vagrant up will be built PHP packages from sources, that may consume a lot of time. Packages are saved in host directory, though are not deleted on future vagrant destroy, and future vagrant up's are lot faster than very first one.
 
 ## Description
 
-**MaxPHPBox Vagrant stills in maintenance state, though not fully automated and not well-documented yet**. For LAMP stack installation you first need to prepare all needed PHP .deb packages. To compile PHPs and package your own debs, you must invoke provisioners chain: *"install-build-tools,build-php,package-php"*. If this procedure succeeds, in host's *files/deb/* directory will be created ready-to-install deb packages for every PHP version. If later you'll decide to *vagrant destroy && vagrant up* your guest, there's no need to compile them again - they will be automatically installed from packages. Later, compiling process should be fully automated with no need to invoke any provisioners by hand.
+**MaxPHPBox Vagrant** provides fully functional LAMP stack installation with multiple PHP versions, switchable for every virtual host.
 
 ### PHP versions included
 
@@ -25,16 +25,18 @@
 * Memcached
 * Imagick
 * GD
-* ... and others ...
+* ...
 
 ### Other software included
 
 * MySQL
 * Sqlite
-* MailHog
 * Ruby
 * Git
 * Htop
+* ack (grep tool for programmers)
+* Webgrind (PHP profiling in the browser)
+* MailHog (debug PHP emails)
 
 ## Configuration
 
@@ -70,18 +72,22 @@ ssh vagrant@192.168.50.2
 
 ssh vagrant@vagrant
 
+#### HTTP
+
 http://192.168.50.2/
 
 http://vagrant/
+
+#### MySQL
 
 mysql -uroot -proot -h 192.168.50.2
 
 mysql -uroot -proot -h vagrant
 
-### MailHog
+#### MailHog
 http://vagrant:8025/
 
-### Mailcatcher
+#### Mailcatcher
 
 (if is installed instead of MailHog)
 
