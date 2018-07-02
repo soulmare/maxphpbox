@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
     #v.cpus = 2
     #v.memory = 512
     v.cpus = 4
-    v.memory = 1024
+    v.memory = 2048
   end
   
   # to use half of available CPUs
@@ -50,8 +50,14 @@ Vagrant.configure("2") do |config|
   # MySQL server
   #config.vm.network "forwarded_port", guest: 3306, host: 3360
 
+  composer_packages     = [        # List any global Composer packages that you want to install
+    "phpunit/phpunit:6.0.*",
+    #"codeception/codeception=*",
+    #"phpspec/phpspec:2.0.*@dev",
+    #"squizlabs/php_codesniffer:1.5.*",
+  ]
 
-  # Provisioners. Set up LAMP server with multiple PHP versions
+  # Provisioners
 
   config.vm.provision "install-apps",
     type: "shell",
@@ -70,6 +76,12 @@ Vagrant.configure("2") do |config|
   config.vm.provision "lamp-setup",
     type: "shell",
     path: "provision/lamp-setup.sh"
+
+  config.vm.provision "composer",
+    type: "shell",
+    privileged: false,
+    args: [composer_packages.join(" ")],
+    path: "provision/composer.sh"
 
   config.vm.provision "install-mailhog",
     type: "shell",
