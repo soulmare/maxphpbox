@@ -18,9 +18,9 @@
     
     //Email response
     if ($result) {
-      echo "<b>OK mail sent</b>";
+      echo "<b style='color:blue'>OK mail sent</b>";
     } else {
-      echo "<b>Error</b><br>";
+      echo "<b style='color:red'>Error</b><br>";
       var_export(error_get_last());
     }
   }
@@ -42,5 +42,4 @@
   
   <br/>
   
-  <a href="http://vagrant:8025/">MailHog</a>
-  
+  <iframe src="http://vagrant:8025/" style="margin:100px;width:800px;height:400px" />

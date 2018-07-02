@@ -2,7 +2,6 @@
 
 #
 # Compile and install PHP of several versions with help of Phpbrew.
-# To force recompiling please purge appropriate /opt/php/<version> directory 
 #
 # This script must be invoked only if you really need to (re-)build PHP yourself (it may take a lot of time).
 # Instead, you can install them from .deb's, or even better - use Vagrant provisioners for this task.
@@ -20,16 +19,6 @@
 #
 
 source /vagrant/scripts/setvars.sh
-
-if [[ -d /opt/php || -d /vagrant/files/deb ]]; then
-  echo "To force recompile PHPs, remove guest's directory /opt/php and host's files/deb"
-  exit
-fi
-
-if [ -d /opt/php ]; then
-  echo "To force build PHP packages, remove host's directory files/deb/"
-  exit
-fi
 
 export PATH="$PATH:/usr/bin/"
 
@@ -63,9 +52,7 @@ if [ $DRY_RUN == true ]; then
   PHPBREW_FLAGS="--dryrun $PHPBREW_FLAGS"
 fi
 
-#declare -a PHP_VERSIONS_ALL=("5.2.17" "5.3.29" "5.6.36" "7.2.7")
-#declare -a PHP_VERSIONS_ALL=("5.2.17" "5.3.29")
-declare -a PHP_VERSIONS_ALL=("5.2.17" "5.3.29" "5.4.45" "5.5.38" "5.6.36" "7.0.30" "7.1.18" "7.2.7")
+PHP_VERSIONS_ALL=$1
 
 
 # Install phpbrew if it is not installed yet.
@@ -127,10 +114,9 @@ fi
 
 if command -v php >/dev/null; then
       
-  for (( i = 0; i < ${#PHP_VERSIONS_ALL[@]} ; i++ )); do
+  for PHP_VERSION in $PHP_VERSIONS_ALL
+  do
 
-    PHP_VERSION="${PHP_VERSIONS_ALL[$i]}"
-  
     a=( ${PHP_VERSION//./ } ) # replace points, split into array
     ((a[2]++)) # increment revision (or other part)
     PHP_VERSION_MAJOR="${a[0]}.${a[1]}" # shorten version
@@ -141,7 +127,7 @@ if command -v php >/dev/null; then
     # Compile PHP only if it is not installed yet
     if ! $PHP_PATH/bin/php -v >/dev/null 2>&1; then
 
-      PHP_CONFIGURE_PATHS="--prefix=$PHP_PATH --exec-prefix=$PHP_PATH --sysconfdir=$PHP_PATH/etc --with-config-file-path=$PHP_PATH/etc --with-config-file-scan-dir=$PHP_PATH/etc/php.d --with-pear=$PHP_PATH/lib/php/pear"
+      PHP_CONFIGURE_PATHS="--prefix=$PHP_PATH --exec-prefix=$PHP_PATH --sysconfdir=/etc/php/$PHP_VERSION_MAJOR --with-config-file-path=/etc/php/$PHP_VERSION_MAJOR --with-config-file-scan-dir=/etc/php/$PHP_VERSION_MAJOR/conf.d --with-pear=$PHP_PATH/lib/php/pear"
       mkdir -p /vagrant/files/php/$PHP_VERSION_MAJOR/
       mkdir -p /opt/php
       if [ ! $DRY_RUN == true ]; then
@@ -152,6 +138,37 @@ if command -v php >/dev/null; then
       #--post-clean --test --dryrun
       case "$PHP_VERSION_MAJOR" in 
           5.2 )
+#              if [ ! -f /usr/local/openssl-0.9.8/bin/openssl ]; then
+#                echo "Installing legacy Openssl 0.9.8"
+#                cd /usr/local/src
+#                wget -c https://www.openssl.org/source/old/0.9.x/openssl-0.9.8w.tar.gz
+#                tar xvf openssl-0.9.8w.tar.gz
+#                cd openssl-0.9.8w
+#                ./config --openssldir=/usr/local/openssl-0.9.8
+#                echo "Make logfile: /tmp/openssl.make.log"
+#                make >/tmp/openssl.make.log
+#                make install_sw
+#              fi
+              if [ ! -f /usr/local/openssl-1.0.2n/bin/openssl ]; then
+                echo "Installing legacy Openssl 1.0.2n"
+                cd /usr/local/src
+                wget -q -c https://www.openssl.org/source/old/1.0.2/openssl-1.0.2n.tar.gz
+                tar xf openssl-1.0.2n.tar.gz 
+                rm openssl-1.0.2n.tar.gz 
+                cd openssl-1.0.2n/
+                export CFLAGS=-fPIC
+                ./config shared --openssldir=/usr/local/openssl-1.0.2n
+                echo "Executing make. Logfile: /tmp/openssl.make.log"
+                make clean
+                make >/tmp/openssl.make.log
+                if [ ! $? -eq 0 ]; then
+                  tail -n10 /tmp/openssl.make.log
+                  echo "    ERROR: configure failed. Log: /tmp/openssl.make.log"
+                  exit 2
+                fi
+                make install_sw
+                ln -s /usr/local/openssl-1.0.2n/lib /usr/local/openssl-1.0.2n/lib/x86_64-linux-gnu
+              fi
               echo "${TXHLT}Compile PHP $PHP_VERSION (stage 1 of 2: apxs2 target) ...${TXNORM}"
               phpbrew $PHPBREW_CMD_FLAGS install $PHPBREW_FLAGS --old --name $PHP_VERSION_MAJOR \
                   --patch /vagrant/files/php/patches/node.patch \
@@ -159,7 +176,7 @@ if command -v php >/dev/null; then
                   --patch /vagrant/files/php/patches/gmp.patch \
                   $PHP_VERSION $PHPBREW_CONFIGURE_OPTS +apxs2 -cli -cgi \
                   -- $PHPBREW_CONFIGURE_EXT_OPTS $PHP_CONFIGURE_PATHS \
-                  --with-sqlite=shared --with-mysqli=shared,/usr/bin/mysql_config --with-mysql=shared,/usr --with-mysql-sock=/var/run/mysqld/mysqld.sock --with-pdo-mysql=shared --with-pdo-odbc=shared,unixODBC,/usr --with-pdo-sqlite=shared --with-gd
+                  --with-openssl=/usr/local/openssl-1.0.2n --with-openssl-dir=/usr/local --with-sqlite=shared --with-mysqli=shared,/usr/bin/mysql_config --with-mysql=shared,/usr --with-mysql-sock=/var/run/mysqld/mysqld.sock --with-pdo-mysql=shared --with-pdo-odbc=shared,unixODBC,/usr --with-pdo-sqlite=shared --with-gd
               if [ ! $? -eq 0 ]; then
                 echo "${FBOLD}${CLRED}ERROR: compilation (apxs2 target) failed${TXNORM}"
                 exit 1
@@ -171,7 +188,7 @@ if command -v php >/dev/null; then
                   --patch /vagrant/files/php/patches/gmp.patch \
                   $PHP_VERSION $PHPBREW_CONFIGURE_OPTS -apxs2 \
                   -- $PHPBREW_CONFIGURE_EXT_OPTS $PHP_CONFIGURE_PATHS \
-                  --with-sqlite=shared --with-mysqli=shared,/usr/bin/mysql_config --with-mysql=shared,/usr --with-mysql-sock=/var/run/mysqld/mysqld.sock --with-pdo-mysql=shared --with-pdo-odbc=shared,unixODBC,/usr --with-pdo-sqlite=shared --with-gd
+                  --with-openssl=/usr/local/openssl-1.0.2n --with-openssl-dir=/usr/local --with-sqlite=shared --with-mysqli=shared,/usr/bin/mysql_config --with-mysql=shared,/usr --with-mysql-sock=/var/run/mysqld/mysqld.sock --with-pdo-mysql=shared --with-pdo-odbc=shared,unixODBC,/usr --with-pdo-sqlite=shared --with-gd
               ;;
           5.3 )
               echo "${TXHLT}Compile PHP $PHP_VERSION (stage 1 of 2: apxs2 target) ...${TXNORM}"
@@ -202,13 +219,13 @@ if command -v php >/dev/null; then
         mv /etc/apache2/mods-available/php${PHP_VERSION_MAJOR2}.load /etc/apache2/mods-available/php${PHP_VERSION_MAJOR}.load
   
         # Copy sample ini files
-        mkdir -p $PHP_PATH/etc/
-        cp $HOME/.phpbrew/build/$PHP_VERSION_MAJOR/php.ini* $PHP_PATH/etc/
+        mkdir -p /etc/php/$PHP_VERSION_MAJOR/
+        cp $HOME/.phpbrew/build/$PHP_VERSION_MAJOR/php.ini* /etc/php/$PHP_VERSION_MAJOR/
 #        if [ -f $HOME/.phpbrew/build/$PHP_VERSION_MAJOR/php.ini-development ]; then
-#          cp $HOME/.phpbrew/build/$PHP_VERSION_MAJOR/php.ini-development $PHP_PATH/etc/php.ini
+#          cp $HOME/.phpbrew/build/$PHP_VERSION_MAJOR/php.ini-development /etc/php/$PHP_VERSION_MAJOR/php.ini
 #        else
 #          if [ -f $HOME/.phpbrew/build/$PHP_VERSION_MAJOR/php.ini-dist ]; then
-#            cp $HOME/.phpbrew/build/$PHP_VERSION_MAJOR/php.ini-dist $PHP_PATH/etc/php.ini
+#            cp $HOME/.phpbrew/build/$PHP_VERSION_MAJOR/php.ini-dist /etc/php/$PHP_VERSION_MAJOR/php.ini
 #          fi
 #        fi
         

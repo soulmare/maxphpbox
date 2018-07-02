@@ -52,28 +52,35 @@ Vagrant.configure("2") do |config|
 
   # Apps from system packages to install
   # No libraries in this list, only apps with same binary name as package name.
-  # Except MySQL, Composer, PHP - as they are installed by separate script.
+  # Except MySQL, Composer, PHP - as they are installed by special script.
   system_packages = [
+
+    # Main
     "sqlite3",
     "ruby",
-    "vim",
     "curl",
     "git",
-    "htop",
-    "iotop",
     "zip",
     "g++",
     "apache2",
     "memcached",
+    "imagemagick",
+    "openssl",
+    "python-software-properties",
+    
+    # Optional
+    "vim",
+    "htop",
+    "iotop",
     "tree"
+
   ]
 
-  php_versions_ppa     = [        # Available versions in this PPA: 5.6, 7.0, 7.1, 7.2 
-    "5.2",
-#    "5.6",
-#    "7.0",
-#    "7.1",
-#    "7.2",
+  php_versions_ppa = [ 
+    "5.6",
+    "7.0",
+    "7.1",
+    "7.2",
   ]
 
   php_extensions     = [        # Additional PHP extensions that not install by default
@@ -94,7 +101,15 @@ Vagrant.configure("2") do |config|
     "tidy",
     "xdebug",
     "memcached",
+    "imagick",
     "xmlrpc"
+  ]
+
+  php_versions_compile = [ 
+    "5.2.17",
+#    "5.3.29",
+#    "5.4.45",
+#    "5.5.38",
   ]
 
   composer_packages     = [        # Global Composer packages to install
@@ -119,11 +134,6 @@ Vagrant.configure("2") do |config|
     type: "shell",
     args: [php_versions_ppa.join(" "), php_extensions.join(" ")],
     path: "provision/install-phps.sh"
-
-#  config.vm.provision "build-php",
-#    type: "shell",
-#    keep_color: true,
-#    path: "provision/build-php.sh"
 
 #  config.vm.provision "package-php",
 #    type: "shell",
@@ -162,13 +172,25 @@ Vagrant.configure("2") do |config|
     path: "provision/vhosts.sh"
 
 
-  # Special non-automatic provisiners
+  # Optional provisiners
 
   config.vm.provision "backup-databases",
     type: "shell",
     keep_color: true,
     run: "never",
     path: "provision/backup-databases.sh"
+
+  config.vm.provision "install-legacy-php",
+    type: "shell",
+    run: "never",
+    path: "provision/install-legacy-php.sh"
+
+  config.vm.provision "build-php",
+    type: "shell",
+    keep_color: true,
+    run: "never",
+    args: [php_versions_compile.join(" ")],
+    path: "provision/build-php.sh"
 
   config.vm.provision "purge-build-stuff",
     type: "shell",
