@@ -5,17 +5,17 @@
 source /vagrant/scripts/setvars.sh
 
 # Test if Composer is installed
-#composer -v > /dev/null 2>&1
-#COMPOSER_IS_INSTALLED=$?
-#
-#if [[ $COMPOSER_IS_INSTALLED -ne 0 ]]; then
-#  echo "${TXHLT}Install Composer${TXNORM}"
-#  curl -sS https://getcomposer.org/installer | php
-#  sudo mv composer.phar /usr/local/bin/composer
-#else
-#  echo "Self-update Composer"
-#  composer self-update
-#fi
+composer -v > /dev/null 2>&1
+COMPOSER_IS_INSTALLED=$?
+
+if [[ $COMPOSER_IS_INSTALLED -ne 0 ]]; then
+  echo "${TXHLT}Install Composer${TXNORM}"
+  curl -sS https://getcomposer.org/installer | php
+  sudo mv composer.phar /usr/local/bin/composer
+else
+  echo "Self-update Composer"
+  composer self-update
+fi
 
 # Install Global Composer Packages if any are given
 

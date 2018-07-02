@@ -2,5 +2,6 @@ backups/
 vhosts/*/
 files/apps/*
 files/deb
+files/deb*
 .vagrant/
 
