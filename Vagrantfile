@@ -50,7 +50,54 @@ Vagrant.configure("2") do |config|
   # MySQL server
   #config.vm.network "forwarded_port", guest: 3306, host: 3360
 
-  composer_packages     = [        # List any global Composer packages that you want to install
+  # Apps from system packages to install
+  # No libraries in this list, only apps with same binary name as package name.
+  # Except MySQL, Composer, PHP - as they are installed by separate script.
+  system_packages = [
+    "sqlite3",
+    "ruby",
+    "vim",
+    "curl",
+    "git",
+    "htop",
+    "iotop",
+    "zip",
+    "g++",
+    "apache2",
+    "memcached",
+    "tree"
+  ]
+
+  php_versions_ppa     = [        # Available versions in this PPA: 5.6, 7.0, 7.1, 7.2 
+    "5.2",
+#    "5.6",
+#    "7.0",
+#    "7.1",
+#    "7.2",
+  ]
+
+  php_extensions     = [        # Additional PHP extensions that not install by default
+    "curl",
+    "gd",
+    "mbstring",
+    "zip",
+    "mysql",
+    "xml",
+    "bz2",
+    "bcmath",
+    "imap",
+    "pspell",
+    "soap",
+    "gmp",
+    "odbc",
+    "sqlite3",
+    "tidy",
+    "xdebug",
+    "memcached",
+    "xmlrpc"
+  ]
+
+  composer_packages     = [        # Global Composer packages to install
     "phpunit/phpunit:6.0.*",
     #"codeception/codeception=*",
     #"phpspec/phpspec:2.0.*@dev",
@@ -59,22 +106,33 @@ Vagrant.configure("2") do |config|
 
   # Provisioners
 
+  config.vm.provision "install-packages",
+    type: "shell",
+    args: [system_packages.join(" ")],
+    path: "provision/install-packages.sh"
+
   config.vm.provision "install-apps",
     type: "shell",
     path: "provision/install-apps.sh"
 
-  config.vm.provision "build-php",
+  config.vm.provision "install-phps",
     type: "shell",
-    keep_color: true,
-    path: "provision/build-php.sh"
+    args: [php_versions_ppa.join(" "), php_extensions.join(" ")],
+    path: "provision/install-phps.sh"
 
-  config.vm.provision "package-php",
-    type: "shell",
-    keep_color: true,
-    path: "provision/package-php.sh"
+#  config.vm.provision "build-php",
+#    type: "shell",
+#    keep_color: true,
+#    path: "provision/build-php.sh"
+
+#  config.vm.provision "package-php",
+#    type: "shell",
+#    keep_color: true,
+#    path: "provision/package-php.sh"
 
   config.vm.provision "lamp-setup",
     type: "shell",
+    args: [php_versions_ppa.join(" ")],
     path: "provision/lamp-setup.sh"
 
   config.vm.provision "composer",

@@ -1,15 +1,8 @@
 #!/bin/bash
 
-#
-# Install basic web-development essentials and LAMP server components
-#
-
 export DEBIAN_FRONTEND=noninteractive
 
 source /vagrant/scripts/setvars.sh
-
-echo "${FBOLD}Update apps ...${FNORM}"
-apt-get update -q && apt-get upgrade -yq
 
 if ! command -v mysql >/dev/null; then
   echo "${FBOLD}Install MySQL ...${FNORM}"
@@ -33,18 +26,9 @@ if ! command -v xtrabackup >/dev/null; then
     wget -q -O /vagrant/files/apps/percona-release_0.1-6.$(lsb_release -sc)_all.deb https://repo.percona.com/apt/percona-release_0.1-6.$(lsb_release -sc)_all.deb
   fi
   dpkg -i /vagrant/files/apps/percona-release_0.1-6.$(lsb_release -sc)_all.deb
-  apt-get update
+  apt-get update -q
   apt-get install -yq percona-xtrabackup-24
 fi
-
-echo "${FBOLD}Install Sqlite3 ...${FNORM}"
-apt-get install -yq sqlite3
-
-echo "${FBOLD}Install Ruby ...${FNORM}"
-apt-get install -yq ruby
-
-echo "${FBOLD}Install utilities ...${FNORM}"
-apt-get install -yq vim curl composer git htop zip g++
 
 # Ack-grep tool
 if [ ! -f /vagrant/files/apps/ack-2.24-single-file ]; then
@@ -53,8 +37,5 @@ fi
 cp /vagrant/files/apps/ack-2.24-single-file /usr/local/bin/ack
 chmod a+x /usr/local/bin/ack
 
-echo "${FBOLD}Install LAMP components ...${FNORM}"
-apt-get install -yq apache2 php libapache2-mod-php php-mysql php-mcrypt php-bcmath php-imap php-mbstring php-pspell php-soap php-curl php-gd php-gmp php-odbc php-sqlite3 php-tidy php-zip php-xmlrpc php-bz2 php-xml php-xdebug php-memcached php-imagick php-pear libfcgi0ldbl imagemagick memcached
-
-# Suppress possible error message from Vagrant
-echo ""
+#echo "${FBOLD}Install LAMP components ...${FNORM}"
+#apt-get install -yq libapache2-mod-php php-mysql php-mcrypt php-bcmath php-imap php-mbstring php-pspell php-soap php-curl php-gd php-gmp php-odbc php-sqlite3 php-tidy php-zip php-xmlrpc php-bz2 php-xml php-xdebug php-memcached php-imagick php-pear libfcgi0ldbl imagemagick
