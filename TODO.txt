@@ -6,3 +6,8 @@
 - use IP as parameter, not hardcoded in scripts
 - remove log colors, leave only bold style
 - mysql empty password
+- add apps:
+  - screen, tmux
+  - Redis
+  - iotop
+  - imagemagick

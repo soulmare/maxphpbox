@@ -9,7 +9,7 @@ if ! which mailhog>/dev/null; then
 #    apt-get install -yq sendmail
 #  fi
 
-  echo "Install MailHog"
+  echo "${TXHLT}Install MailHog${TXNORM}"
 #set -o xtrace
 
   if [ ! -f /vagrant/files/apps/mailhog ]; then

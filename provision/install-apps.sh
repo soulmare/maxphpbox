@@ -45,7 +45,12 @@ apt-get install -yq ruby
 
 echo "${FBOLD}Install utilities ...${FNORM}"
 apt-get install -yq vim curl composer git htop zip g++
-wget -O /usr/local/bin/ack https://beyondgrep.com/ack-2.24-single-file
+
+# Ack-grep tool
+if [ ! -f /vagrant/files/apps/ack-2.24-single-file ]; then
+  wget -q -O /vagran  t/files/apps/ack-2.24-single-file https://beyondgrep.com/ack-2.24-single-file
+fi
+cp /vagrant/files/apps/ack-2.24-single-file /usr/local/bin/ack
 chmod a+x /usr/local/bin/ack
 
 echo "${FBOLD}Install LAMP components ...${FNORM}"
