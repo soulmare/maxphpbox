@@ -37,7 +37,7 @@ if ! command -v xtrabackup >/dev/null; then
   apt-get install -yq percona-xtrabackup-24
 fi
 
-echo "${FBOLD}Install Sqlite ...${FNORM}"
+echo "${FBOLD}Install Sqlite3 ...${FNORM}"
 apt-get install -yq sqlite3
 
 echo "${FBOLD}Install Ruby ...${FNORM}"
