@@ -31,11 +31,13 @@ if ! command -v xtrabackup >/dev/null; then
 fi
 
 # Ack-grep tool
-if [ ! -f /vagrant/files/apps/ack-2.24-single-file ]; then
-  wget -q -O /vagran  t/files/apps/ack-2.24-single-file https://beyondgrep.com/ack-2.24-single-file
+if ! command -v ack >/dev/null; then
+  if [ ! -f /vagrant/files/apps/ack-2.24-single-file ]; then
+    wget -q -O /vagrant/files/apps/ack-2.24-single-file https://beyondgrep.com/ack-2.24-single-file
+  fi
+  cp /vagrant/files/apps/ack-2.24-single-file /usr/local/bin/ack
+  chmod a+x /usr/local/bin/ack
 fi
-cp /vagrant/files/apps/ack-2.24-single-file /usr/local/bin/ack
-chmod a+x /usr/local/bin/ack
 
 #echo "${FBOLD}Install LAMP components ...${FNORM}"
 #apt-get install -yq libapache2-mod-php php-mysql php-mcrypt php-bcmath php-imap php-mbstring php-pspell php-soap php-curl php-gd php-gmp php-odbc php-sqlite3 php-tidy php-zip php-xmlrpc php-bz2 php-xml php-xdebug php-memcached php-imagick php-pear libfcgi0ldbl imagemagick

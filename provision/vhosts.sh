@@ -4,8 +4,8 @@
 
 source /vagrant/scripts/setvars.sh
 
-#VHOSTS_BASEDIR=/vagrant/vhosts
-VHOSTS_BASEDIR=/vhosts
+VHOSTS_BASEDIR=/vagrant/vhosts
+#VHOSTS_BASEDIR=/vhosts
 
 if [[ -d /etc/apache2/sites-available && -d "$VHOSTS_BASEDIR" ]]; then
 

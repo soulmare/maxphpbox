@@ -47,13 +47,21 @@ if [[ ! -z $PHP_VERSIONS ]]; then
         if [ "$PHP_EXTENSION" = "mysql" ]; then
           EXT_NEEDLE="mysqlnd"
         fi
-        if ! grep -w $EXT_NEEDLE /tmp/php_modules.txt >/dev/null; then
-          echo "${FBOLD}Install php${PHP_VERSION}-${PHP_EXTENSION} extension (Ondřej Surý PPA) ...${FNORM}"
-          apt-get install -yq "php${PHP_VERSION}-${PHP_EXTENSION}"
+        if [[ ( ( "$PHP_EXTENSION" = "mcrypt" ) && "$PHP_VERSION" = "7.2" ) \
+            ||  ( ( "$PHP_EXTENSION" = "mssql" ) && ( ( "$PHP_VERSION" = "7.0" ) ||  ( "$PHP_VERSION" = "7.1" ) ||  ( "$PHP_VERSION" = "7.2" ) ) ) ]]; then
+            echo "$PHP_EXTENSION is removed in PHP $PHP_VERSION"
+        else
+            if ! grep -w $EXT_NEEDLE /tmp/php_modules.txt >/dev/null; then
+              echo "${FBOLD}Install php${PHP_VERSION}-${PHP_EXTENSION} extension (Ondřej Surý PPA) ...${FNORM}"
+              apt-get install -yq "php${PHP_VERSION}-${PHP_EXTENSION}"
+            fi
         fi
       done
     fi
 
   done
   
+  a2enmod php${PHP_VERSION} >/dev/null 2>&1
+  service apache2 restart
+
 fi

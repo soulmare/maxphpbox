@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
   # Machine settings
 
   config.vm.provider "virtualbox" do |v|
-    v.name = "maxphpbox"
+    #v.name = "maxphpbox"
     #v.cpus = 2
     #v.memory = 512
     v.cpus = 4
@@ -84,25 +84,32 @@ Vagrant.configure("2") do |config|
   ]
 
   php_extensions     = [        # Additional PHP extensions that not install by default
-    "curl",
-    "gd",
-    "mbstring",
-    "zip",
-    "mysql",
-    "xml",
-    "bz2",
     "bcmath",
-    "imap",
-    "pspell",
-    "soap",
+    "bz2",
+    "curl",
+    "dba",
+    "enchant",
+    "gd",
     "gmp",
+    "imagick",
+    "imap",
+    "interbase",
+    "intl",
+    "mbstring",
+    "mcrypt",
+    "memcached",
+    "mssql",
+    "mysql",
     "odbc",
+    "pspell",
+    "recode",
+    "soap",
     "sqlite3",
     "tidy",
     "xdebug",
-    "memcached",
-    "imagick",
-    "xmlrpc"
+    "xml",
+    "xmlrpc",
+    "zip"
   ]
 
   php_versions_compile = [ 
@@ -154,6 +161,18 @@ Vagrant.configure("2") do |config|
   config.vm.provision "install-mailhog",
     type: "shell",
     path: "provision/install-mailhog.sh"
+
+  config.vm.provision "install-phpmyadmin",
+    type: "shell",
+    path: "provision/install-phpmyadmin.sh"
+
+  config.vm.provision "install-phpmyadmin",
+    type: "shell",
+    path: "provision/install-phpmyadmin.sh"
+
+  config.vm.provision "install-webgrind",
+    type: "shell",
+    path: "provision/install-webgrind.sh"
 
   # MailCatcher can be installed instead of MailHog
   #config.vm.provision "install-mailcatcher",

@@ -7,4 +7,5 @@ if [ ! -d /var/www/html/phpMyAdmin ]; then
   fi
   unzip -q -d /var/www/html/ /vagrant/files/apps/phpMyAdmin-4.8.2-all-languages.zip
   mv /var/www/html/phpMyAdmin* /var/www/html/phpMyAdmin
+  cp /vagrant/files/configs/phpmyadmin.config.inc.php /var/www/html/phpMyAdmin/
 fi

@@ -11,3 +11,4 @@
   - Redis
   - iotop
   - imagemagick
+- remove deprecated # comments from php.ini

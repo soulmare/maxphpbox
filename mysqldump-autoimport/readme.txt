@@ -1,0 +1,1 @@
+Here you can place mysqldump export files, which will be imported on next guest's reload. For each dump file will be created a database with the same name as the file's. If database with such name already exists, no action will be performed.
