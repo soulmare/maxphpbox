@@ -174,6 +174,11 @@ Vagrant.configure("2") do |config|
     type: "shell",
     path: "provision/install-webgrind.sh"
 
+  config.vm.provision "install-goaccess",
+    type: "shell",
+    path: "provision/install-goaccess.sh"
+
+
   # MailCatcher can be installed instead of MailHog
   #config.vm.provision "install-mailcatcher",
   #  type: "shell",
