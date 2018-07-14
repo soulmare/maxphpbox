@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
     #v.cpus = 2
     #v.memory = 512
     v.cpus = 4
-    v.memory = 2048
+    v.memory = 1024
   end
   
   # to use half of available CPUs
@@ -30,8 +30,9 @@ Vagrant.configure("2") do |config|
   #config.vm.synced_folder 'log', '/var/log', type: 'nfs_guest'
 
   #config.vm.synced_folder "vhosts", "/vhosts", owner: "www-data", group: "www-data"
-  config.vm.synced_folder "vhosts", "/vhosts", type: "nfs"
-  #config.vm.synced_folder "vhosts", "/vhosts", type: "nfs", nfs_version: 4, nfs_udp: false
+  # Seems like default NFS not support flock(), and NFS 4 does support it
+  #config.vm.synced_folder "vhosts", "/vhosts", type: "nfs"
+  config.vm.synced_folder "vhosts", "/vhosts", type: "nfs", nfs_version: 4, nfs_udp: false
   #config.vm.synced_folder "vhosts", "/vhosts", type: "sshfs"
 
   #config.vm.synced_folder "vhosts", "/vhosts", mount_options: ["uid=10005,gid=1005"]

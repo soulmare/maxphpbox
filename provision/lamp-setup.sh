@@ -31,6 +31,8 @@ do
 
   a2dismod php${PHP_VERSION}
   ln -s /etc/php.ini /etc/php/$PHP_VERSION/apache2/conf.d/00-php.ini 2>/dev/null
+  ln -s /etc/php.ini /etc/php/$PHP_VERSION/cgi/conf.d/00-php.ini 2>/dev/null
+  ln -s /etc/php.ini /etc/php/$PHP_VERSION/cli/conf.d/00-php.ini 2>/dev/null
   cp /vagrant/files/configs/usr.lib.cgi-bin.php-cgi /usr/lib/cgi-bin/php${PHP_VERSION}-cgi
   chmod +x /usr/lib/cgi-bin/php${PHP_VERSION}-cgi
   cp /vagrant/files/configs/etc.apache2.conf-available.php-cgi.conf /etc/apache2/conf-available/php${PHP_VERSION}-cgi.conf

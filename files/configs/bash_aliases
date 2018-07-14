@@ -5,3 +5,7 @@ alias fcount='find . | wc -l'
 alias tree="tree -I '*~'"
 # History without numbers - applicable for copy/paste. Usage: `histnn`, `histnn -n50` 
 alias histnn="history | cut -c 8- | tail"
+
+# Allow debugging PHP CLI scripts with Netbeans IDE
+export XDEBUG_CONFIG="idekey=netbeans-xdebug"
+

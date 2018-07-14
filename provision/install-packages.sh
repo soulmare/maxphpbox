@@ -10,6 +10,7 @@ fi
 
 if [ ! -f /home/vagrant/.bash_aliases ]; then
   cp /vagrant/files/configs/bash_aliases /home/vagrant/.bash_aliases
+  chown vagrant:vagrant /home/vagrant/.bash_aliases
 fi
 
 echo "${FBOLD}Update apps ...${FNORM}"

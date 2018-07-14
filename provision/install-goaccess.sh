@@ -10,6 +10,7 @@ wget -O - https://deb.goaccess.io/gnugpg.key | sudo apt-key add -
 sudo apt-get update -y
 apt-get install goaccess -yq
 
+# Install from source
 #cd /usr/local/src/
 #wget -q https://tar.goaccess.io/goaccess-1.2.tar.gz
 #tar -xzf goaccess-1.2.tar.gz
