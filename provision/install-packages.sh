@@ -25,6 +25,10 @@ if [[ ! -z $SYSTEM_PACKAGES ]]; then
     if ! command -v $PACKAGE >/dev/null; then
       echo "${FBOLD}Install $PACKAGE ...${FNORM}"
       apt-get install -yq $PACKAGE
+      if [ $PACKAGE == "htop" ]; then
+        echo "Copy htop config"
+        cp /vagrant/files/configs/htoprc /home/vagrant/.config/htop/htoprc 
+      fi
     fi
   done
 fi

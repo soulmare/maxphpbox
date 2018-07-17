@@ -72,6 +72,7 @@ Vagrant.configure("2") do |config|
     # Optional
     "vim",
     "htop",
+    "tmux",
     "iotop",
     "tree"
 
