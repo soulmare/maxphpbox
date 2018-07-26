@@ -29,6 +29,10 @@ if [[ ! -z $SYSTEM_PACKAGES ]]; then
         echo "Copy htop config"
         cp /vagrant/files/configs/htoprc /home/vagrant/.config/htop/htoprc 
       fi
+      if [ $PACKAGE == "tmux" ]; then
+        cp /vagrant/files/configs/tmux.conf /home/vagrant/.tmux.conf
+        chown vagrant:vagrant /home/vagrant/.tmux.conf
+      fi
     fi
   done
 fi
