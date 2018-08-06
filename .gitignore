@@ -4,4 +4,5 @@ files/apps/*
 files/deb
 files/deb*
 .vagrant/
+up.sh
 
